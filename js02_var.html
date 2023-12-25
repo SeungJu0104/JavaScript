@@ -1,0 +1,216 @@
+<!-- 
+기본적으로 자바 스크립트는 인터프리터 언어이기 때문에,
+위에서 아래로 한 줄씩 읽어내려가며 바로 실행하는 특성을 가진다.
+함수는 준비만 되고, 따로 호출하지 않으면 실행되지 않는다.
+
+이러한 특성 때문에, 함수 외부에 그냥 변수를 선언하고
+코드를 작성하면 바로 실행해버린다.
+
+자바 스크립트에서는 들어오는 데이터 타입에 따라 타입이 결정된다.
+(따로 데이터 타입 선언할 필요가 없다.)
+
+var 변수
+: 다양한 데이터 값 담긴다.
+: 중간에 다른 값으로 변경할 수 있다.
+: hoisting 가능하다.
+
+let 변수
+: 다양한 데이터 값 담긴다.
+: hoisting 가능한 부분 제외하고 var와 동일한 기능을 하는 변수
+: 중간에 다른 값으로 변경할 수 있다.
+
+const 변수
+: 다양한 데이터 값 담긴다.
+: 한번 값을 지정하면 다른 값으로 변경할 수 없는 변수.
+
+변수의 선언 규칙
+1. 대소문자 구분
+2. 영문자, _ , $ 로 시작한다.
+3. 영문자, _ , $, 숫자를 포함해 변수명을 만들 수 있다.
+4. 키워드 또는 예약어는 변수명으로 사용 불가하다. 
+
+변수의 범위
+1. 전역 변수
+: window 객체에 포함되는 변수로 다른 함수들에서 공용으로 사용할 수 있다. (값 유지)
+: 스크립트 태그 내부에 선언한다.
+
+2. 지역 변수
+: 함수나 객체 내부에 선언하고, 실행 종료되면 사라진다.
+
+변수 선언과 저장
+1. var, let, const 키워드를 이용해 변수명과 함께 변수를 선언한다.
+2. 변수의 타입은 저장되는 데이터의 타입에 따라 결정된다.
+
+타입의 종류
+1. 문자 => String
+2. 숫자(소수 포함) => number
+3. 논리 => boolean
+4. 널 => null
+5. 객체 => Object
+6. 함수 => Function
+(변수에 함수도 담을 수 있다.)
+
+typeof 변수명 이용해서 변수 타입을 확인할 수 있다.
+(typeof 연산자의 버그로 제대로 null값 구분못해서 객체 타입이라고 나온다.)
+
+브라우저 개발자 도구 콘솔 창에 출력은 console.log(내용); 이용한다.
+console.log()를 쓸 때, + 사용을 안하려면 ``안에 변수들은 ${} 안에 담아 쓰면 된다.
+
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/JavaScript">
+        console.log(test);
+        //선언 전에 출력해보면 undefined라고 나온다.
+        // 출력 실행 전에 아래쪽까지 한번 쭉 코드를 보고,
+        // 아래쪽에 var 변수가 선언된 것을 본 뒤에 var 변수를 미리 생성한다.
+        // 이걸 varhoisting 이라고 부른다.
+
+        var test=1; //var 변수
+        console.log(test);
+        // 브라우저의 개발자 도구 콘솔 창에 1 출력.
+
+        var test=22; //let 변수
+        console.log(test);
+
+        // console.log(test2);
+        // 선언 전에 출력해보면 에러가 발생한다.
+
+        let test2=2; //let 변수
+        console.log(test2);
+        // 브라우저의 개발자 도구 콘솔 창에 2 출력.
+
+        test2=22;
+        console.log(test2);
+        // 브라우저의 개발자 도구 콘솔 창에 22 출력.
+        // 값 변경 가능하다.
+
+        // console.log(test3);
+        // 선언 전에 출력해보면 에러가 발생한다.
+
+        const test3=3; //const 변수
+        console.log(test3);
+        // 브라우저의 개발자 도구 콘솔 창에 3 출력.
+
+        // test3=33;
+        // console.log(test3);
+        //const 변수는 중간에 값 변경 불가하므로 에러 발생
+// -----------------------------------------------------------------
+        
+        let variable = 10; //전역 let 변수 variable 선언
+
+        function test01(){
+            variable = variable + 5;
+            document.getElementById("v01").innerHTML = "<b>" + variable + "</b>";
+            // ID가 v01인 태그 요소를 갖고 와 변수 값을 집어 넣어 값을 변경한다.
+        }
+
+        function test02(){
+            const variable2 = variable + 100; //지역 const 변수 variable2 선언
+            // variable2는 지역변수이기 때문에, test02 함수가 종료되면 사라진다.
+            //그래서 variable 값이 계속 변하더라도, 
+            //test02 함수가 실행될 때마다 만들어져서 변한 variable 값을 기준으로 100을 더한 값을 저장하기 때문에
+            //const 변수는 값을 변경할 수 없다는 에러가 뜨지 않고, 계속 실행되는 것이다.
+            document.getElementById("v02").innerHTML = "<b>" + variable + "<b>";
+            // ID가 v02인 태그 요소를 갖고 와 변수 값을 집어 넣어 값을 변경한다.
+        }
+
+        let test03 = function (){//변수에 함수를 담을 수 있다.
+            //문자
+            let variable3 = "값";
+            console.log(variable3 + " : " + typeof variable3);
+
+            //숫자
+            variable3 = 10;
+            console.log(`${variable3} : ${typeof variable3}`);
+            // ``를 이용해 +를 사용하지 않고, 출력
+
+            //논리
+            variable3 = false;
+            console.log(variable3 + " : " + typeof variable3);
+
+            //널
+            variable3 = null;
+            console.log(variable3 + " : " + typeof variable3);
+            // typeof 연산자의 버그로 제대로 null값 구분못해서 객체 타입이라고 나온다.
+            //실제로는 null 타입 맞다.
+            console.log(variable3 == null);
+            // true값 준다.
+
+            //객체
+            variable3 = [1,2,3,"가나다",4,false]; //객체 배열
+            console.log(`${variable3} : ${typeof variable3}`);
+            //사용자 객체
+            variable3 = {name:"이창진", age:20}; //자바의 Map과 유사
+            console.log(`${variable3} : ${typeof variable3}`);
+
+            //함수
+            variable3 = () => alert("변수의 타입"); //자바의 람다식과 유사
+            console.log(`${variable3} : ${typeof variable3}`);
+
+            variable3(); //variable3에 저장된 함수가 실행된다.
+        }
+
+
+    </script>
+</head>
+<body>
+    <h1>변수의 사용</h1>
+    <dl>
+        <dt>변수의 선언 규칙</dt>
+        <dd>1. 대소문자 구분</dd>
+        <dd>2. 영문자, 일부 특수기호(_ $)로 변수명 시작</dd>
+        <dd>3. 영문자, 일부 특수기호(_ $), 숫자를 포함해 변수명을 만들 수 있다.</dd>
+        <dd>4. 키워드나 예약어 사용 불가하다.</dd>
+
+        <dt>변수의 범위</dt>
+        <dd>1. 전역 변수 : window 객체에 포함되는 변수로 다른 함수들에서 공용으로 사용할 수 있다. (값 유지)
+            <button onclick="test01();">확인</button>
+            <!-- 버튼 클릭하면 test01 함수 실행된다. -->
+        </dd>
+        <dd id="v01"></dd>
+        <dd>2. 지역 변수 : 함수나 객체 내부에 선언하고, 실행 종료 후 사라진다.
+            <button onclick="test02();">확인</button>
+        </dd>
+        <dd id="v02"></dd>
+
+        <dt>변수 선언과 저장</dt>
+        <dd>1. var, let, const 키워드 이용해 변수명과 함께 변수를 선언한다.</dd>
+        <dd>2. 변수의 타입은 저장되는 데이터의 타입에 따라 결정된다.
+            <button onclick="test03();">확인</button>
+        </dd>
+
+        <dt>타입의 종류</dt>
+        <dd>1. 문자(String)</dd>
+        <dd>2. 숫자(number)</dd>
+        <dd>3. 논리(boolean)</dd>
+        <dd>4. 널(null)</dd>
+        <dd>5. 객체(Object)</dd>
+        <dd>6. 함수(Function)</dd>
+        <dd>변수에 함수 저장할 수 있다.</dd>
+
+    </dl>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
