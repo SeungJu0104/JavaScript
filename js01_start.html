@@ -1,0 +1,98 @@
+<!-- 
+JavaScript
+: 웹 브라우저에서 많이 사용하는 인터프리터 방식의 객체지향 프로그래밍 언어.
+: ECMA 스크립트 표준을 따르는 대표적인 웹 기술.
+
+작성 방식
+1. 태그에 직접 작성(인라인)
+: <태그명 실행 트리거 동작 = "실행할 내용;"><종료 태그>
+2. 스크립트 태그 영역에 작성
+: <script type = "text/JavaScript"> 내용 </script>
+: <태그명 실행 트리거 동작 = "위의 내용에서 작성한 함수명 등;"><종료 태그>
+3. 외부에서 스크립트 작성
+: <script type="text/JavaScript" src="파일 위치"></script>
+: <태그명 실행 트리거 동작 = "외부에서 작성한 함수명 등;"><종료 태그>
+
+항상 원하는 동작을 감지해 코드가 실행될 수 있도록 작성해야한다.
+
+window.alert("메세지 내용");
+또는 alert("메세지 내용");
+하면 브라우저 메세지 창에 메세지 내용을 담아 띄운다.
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+    <!-- 스크립트 태그 -->
+    <script type="text/JavaScript">
+        function test() {
+            window.alert("embedded");
+            // embedded라는 내용이 담긴 브라우저 경고창을 띄운다.
+            var doc = document.getElementsByTagName("li")[1];
+            //li 태그를 모두 찾아서 그 중 1번 li태그를 doc에 담는다.
+            doc.style.color="red";
+            // 담긴 내용의 글자 색을 빨강색으로 바꾼다.
+            doc.innerHTML="<b>글자가 바뀝니다.</b>";
+            // 요소.innerHTML = 값;
+            // 요소의 기존 내용을 새 내용으로 바꾼다.
+        }
+    </script>
+    <script type="text/JavaScript" src="./JS/test.js"></script>
+</head>
+<body>
+    <h1>자바 스크립트</h1>
+    <dl>
+        <dt>자바 스크립트</dt>
+        <dd>
+            웹 브라우저에서 많이 사용하는 인터프리터 방식의 객체지향 프로그래밍 언어이다.<br>
+            ECMA 스크립트 표준을 따르는 대표적인 웹 기술.
+        </dd>
+        <dt>자바 스크립트 사용 방법</dt>
+        <dd>
+            <ol>
+                <li>태그에 직접 간단한 코드를 작성해 실행한다.</li>
+                <li>스크립트 태그 영역에 작성해서 실행한다.</li>
+                <li>외부에서 작성해서 실행한다.</li>
+            </ol>
+        </dd>
+    </dl>
+
+    <hr>
+    <!-- h1 태그를 클릭하면, 'test3'이라는 
+    내용이 담긴 브라우저 메세지를 출력하는 test3 함수를 작성한다. -->
+    <!-- test3 함수는 외부 스크립트 파일 test.js에 작성한다. -->
+    <h1 onclick="test3();">자바 스크립트 작성 방식 3가지</h1>
+    <o1>
+        <!-- 1. Inline -->
+        <li onclick="window.alert('inline');">Inline 방식</li>
+        <!-- 클릭하면 윈도우에서 inline이라는 문장을 경고 화면에 띄운다. -->
+        <!-- 2. 스크립트 태그 -->
+        <li onclick="test();">내부 작성 방식</li>
+        <!-- 클릭하면 test 함수를 실행한다. 함수는 위에 작성되어있다. -->
+        <!-- 3. 외부 -->
+        <li onclick="test2();">외부 작성 방식</li>
+        <!-- 클릭하면 test2 함수를 실행한다. 함수는 외부에 작성되어있다. -->
+    </o1>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
