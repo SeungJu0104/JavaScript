@@ -1,0 +1,109 @@
+<!-- 
+함수의 종류
+1. 명시적 함수
+: 일반적으로 사용되는 함수
+: function 함수명([매개변수]){실행할 코드}
+([]부분은 생략 가능)
+(function 반드시 적기)
+(매개변수 없어도 소괄호 자체는 생략 안된다.)
+
+2. 익명 함수
+: 단독으로는 실행 불가능한 함수
+(변수에 담아 실행한다.)
+: function([매개변수]){실행할 코드}
+(function 반드시 적기)
+
+3. 리터럴 함수(콜백 함수)
+: 값으로 사용되는 함수
+(function 반드시 적기)
+
+arguments 속성
+: 인자값의 개수만큼 배열 형태로 저장한다.
+(자바와는 다르게 인자 값을 개수에 맞춰 다 넣지 않고, 
+일부 또는 아예 넣지 않아도 동작한다.)
+(넘어온 인자 값들은 사용되지 않더라도 arguments에 담겨있다.)
+
+ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function02</title>
+    <script type="text/JavaScript">
+        function func01(){
+            alert("명시적 함수");
+        }
+        const func02 = function(){
+            alert("익명 함수");
+        }
+        function func03(){
+            literalPrn(function(msg){alert(msg);});
+            literalPrn2(function(){alert("복잡하다.");});
+        }
+        // 리터럴 함수 클릭하면 func03이 실행된다.
+        function literalPrn(arg){
+            arg("리터럴 함수");
+            // const arg = function(msg){alert(msg);}
+            // arg("리터럴 함수"); 하면 arg에 담긴 함수가 실행되고,
+            // 실행하면서 msg="리터럴 함수"가 담기고,
+            // "리터럴 함수"를 alert 한다.
+        }
+        function literalPrn2(arg){
+            arg();
+            // const arg = function(){alert("복잡하다.");}
+            //"복잡하다."를 alert 한다.
+        }
+
+        function valTest(){
+            console.log(arguments);
+            //따로 받는 매개변수 개수 정하지 않았지만,
+            //넘어온 인자들은 모두 arguments 배열에 담긴다.
+            //함수에 적힌 매개변수 개수와 인자 개수가 맞지 않아도 동작한다.
+
+            let val = "";
+            for(let i = 0; i < arguments.length; i++){
+                val += arguments[i] + " ";
+            }
+            alert(val);
+        }
+
+        function closureTest(val){
+            const msg = "!!!!";
+
+            function addVal() {
+                alert(val + " " + msg);
+            }
+
+            return addVal;
+            // 함수 자체를 리턴한다.
+        }
+
+        let javaClass = closureTest("javascript");
+        // javaClass 변수에 function addVal(){alert(val + " " + msg);}가 담긴다.
+    </script>
+ </head>
+ <body>
+    <h1>Function 함수</h1>
+    <h2>함수의 종류</h2>
+    <p onclick="func01();">1. 명시적 함수</p>
+    <p onclick="func02();">2. 익명 함수</p>
+    <!-- 변수 func02에 담긴 함수를 실행한다. -->
+    <p onclick="func03();">3. 리터럴 함수</p>
+
+    <h2 onclick="valTest('multi','캠퍼스','세종대','501호')">args(arguments) 속성</h2>
+    
+    <h2>클로저 Closure (함수 리턴)</h2>
+    <p>클로저는 외부함수의 변수에 접근할 수 있는 내부 함수</p>
+    자바 스크립트 수업 <input type="text" id="day" value="">&nbsp; 
+    <input type="button" value="click" onclick="javaClass();">
+ </body>
+ </html>
+
+
+
+
+
+
+
