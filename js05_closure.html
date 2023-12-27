@@ -1,0 +1,99 @@
+<!-- 
+클로저(스코프 체인)
+: 외부함수의 변수, 파라미터에 접근할 수 있는 내부 함수
+(원래 함수 내에서 선언된 지역 변수는 함수 외부에서 사용할 수 없다.)
+(하지만, 함수를 리턴하는 함수를 이용하면 본래 지역 변수 범위 외부에서도 사용 가능하다.)
+: 결과적으로, 사용되는 전역변수의 개수를 줄일 수 있다.
+: return 함수
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closure Test</title>
+    <script type="text/JavaScript">
+        function test01(name){
+            let output = "Hello " + name;
+        }
+        // alert(output);
+        // 여기서 output은 지역변수이기 때문에 에러 발생.
+
+        //클로저를 사용하면 지역변수의 본래 범위 외에서도 사용이 가능하다.
+        function test02(name){
+
+            let output = "Hello " + name;
+
+            return function(){
+                alert(output);
+            }
+            //클로저를 사용해 지역변수 output을 외부에서도 사용할 수 있다.
+        }
+
+        function test03(button) {
+            //const button = button 태그 자체
+            //console.log(button);
+            let subject = button.innerHTML;
+            // button 태그의 내용 'JavaScript'가 subject 변수에 저장된다.
+            // button 태그 시작 태그와 종료 태그 사이에 내용이 저장된다.
+            // (내용에 다른 태그가 있다면 다른 태그 까지 같이 저장된다.)
+            //console.log(subject);
+
+            let fn = test04(subject);
+            // 변수 fn에 test04 함수를 담는다. 실행 X
+            alert(fn());
+            //fn에 담긴 함수 test04를 실행해 반환 값을 메세지로 출력한다.
+        }
+
+        function test04(subject) {
+            // 변수 subject에 test03의 지역변수 subject 내용이 담긴다.
+            let output = "오늘 배울 내용은 " + subject + "입니다.";
+            
+            return function() {
+                return output;
+            }
+            //클로저로 지역 변수 output을 반환준다.
+        }
+
+    </script>
+</head>
+<body>
+    <h1>클로저</h1>
+    <h3>지역 변수의 스코프</h3>
+    <p>함수 내부 선언된 변수는 함수 외부에서 사용 불가하다.</p>
+    <button onclick="test01('이창진');">클릭</button>
+
+    <h3>클로저</h3>
+    <p>함수를 리턴하는 함수를 이용하면 본래 지역 변수 범위 외에서도 사용 가능하다.</p>
+    <button onclick="test02('이창진')();">클릭</button>
+    <!-- test02('이창진')을 실행하면 test02 함수의 지역변수 output에 'Hello 이창진'이 담긴다.
+         그리고 익명 함수를 리턴 주기 때문에 button 태그에
+         <button onclick="function(){alert(output);}()">클릭</button>이 된다.
+         button 태그에 담긴 익명 함수가 실행되면서, 외부에서도 지역변수 output을 가져다가 alert를 실행한다.
+     -->
+     <!-- 이런 이유 때문에 여기서는 test02 뒤에 ()가 없으면 실행이 제대로 안된다. -->
+    
+     <h3>클로저 연습</h3>
+     <button onclick="test03(this);">JavaScript</button>
+     <!-- 여기서 this는 button 태그 자체 -->
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
