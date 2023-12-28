@@ -1,0 +1,91 @@
+<!-- 
+특정 태그의 기본 이벤트 작동 중지
+: false 값을 주면 기본 이벤트 작동을 안시킬 수 있다.
+ex) a 태그의 기본 이벤트는 링크로 이동하는 것인데, 
+    false 주면 이걸 막을 수 있다.
+
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>태그의 기본 이벤트 작동을 취소하는 방법</title>
+    <style type="text/css">
+        img{
+            width: 300px;
+            height: 300px;
+            vertical-align: middle;
+        }
+
+        a{
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 30pt;
+        }
+    </style>
+    <script type="text/javascript">
+        let num = 1;
+        let r_num = 3;
+        function next(){
+            num++;
+
+            // 마지막 이미지면 첫 이미지로 돌려보낸다.
+            if(num > 3){
+                num=1;
+            }
+            
+            document.getElementById("gallery").src = "../sample/image/img0" + num + ".png";
+            
+            return false;
+        }  
+        
+        function prev(){
+            num--;
+
+            // 첫 이미지면 마지막 이미지로 돌려보낸다.
+            if(num < 1){
+                num = 3;
+            }
+
+            document.getElementById("gallery").src = "../sample/image/img0"+num+".png";
+
+            return false;
+        }
+    </script>
+</head>
+<body>
+    <div id="galleryWrap">
+        <p>
+            <a href="http://www.naver.com" onclick="return prev();">이전 이미지</a>
+            <!-- return 안 쓰면 일시적으로 이전 이미지 잠깐 나왔다가 적힌 링크로 이동한다. -->
+            <!-- next()의 실행 결과로 false 값을 받고, return false로 인해 onclick의 결과 값으로 false가 반환 된다.
+                 그 결과, a 태그의 기본 수행 작업인 링크 이동(href)을 수행하지 않는다. -->
+            <img src="../sample/image/img01.png" id="gallery">
+            <a href="" onclick="return next();">다음 이미지</a>
+            <!-- return 안 쓰면 일시적으로 다음 이미지 잠깐 나왔다가 원래 이미지로 롤링 된다. -->
+            <!-- next()의 실행 결과로 false 값을 받고, return false로 인해 onclick의 결과 값으로 false가 반환 된다.
+                 그 결과, a 태그의 기본 수행 작업인 링크 이동(href)을 수행하지 않는다. -->
+        </p>
+
+    </div>
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
