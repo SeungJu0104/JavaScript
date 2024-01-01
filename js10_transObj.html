@@ -1,0 +1,111 @@
+<!-- 
+객체 형변환
+
+1. 숫자형 형변환 number 함수
+: 문자형의 정수 및 실수를 숫자형으로 변환시켜준다.
+
+    1) Number 생성자
+    : Number(값 또는 변수명);
+
+    2) parseInt 함수
+    : 정수형 형변환
+    : parseInt(값 또는 변수명);
+
+    3) parseFloat 함수
+    : 실수형 형변환
+    : parseFloat(값 또는 변수명);
+
+    4) 문자열 숫자의 + 연산
+    : += 을 사용한다.
+
+
+ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체 형변환</title>
+    <script type="text/javascript">
+
+        //람다식
+        let numTest = (num) => {
+            // alert(num + 5); 
+            // 숫자 합이 되는게 아니라 문자열로 그냥 뒤에 5가 붙는다.
+            // 11+5 = 16이 아니라 115가 나온다.
+            // alert(value + " : " + typeof value);
+            let val = Number(num) + 5;
+            // 넘겨받은 num을 숫자로 변환해 5를 더해서 val에 저장한다.
+            // 문자 입력받았으면 NaN 출력한다.
+            alert(val);
+        } 
+
+        //익명 함수
+        let intTest = function(num){
+            const val = parseInt(num) + 10;
+            // 넘겨받은 num을 숫자로 변환해 10을 더해서 val에 저장한다.
+            // 실수 입력받았으면 버림해서 정수로 바꾼다.
+            // 문자 입력받았으면 NaN 출력한다.
+            alert(val);
+        }
+
+        //일반 함수
+        function floatTest(num){
+            const val = parseFloat(num) + 15;
+            // 넘겨받은 num을 숫자로 변환해 15를 더해서 val에 저장한다.
+            // 정수 입력하면 뒤에 표기할 소수점 아래 자리가 없어서 그냥 정수형태로 출력한다.
+            // 문자 입력받았으면 NaN 출력한다.
+            // 다른 언어보다 부동소수점으로 인한 문제가 더 쉽게 생긴다. 그래서 js에서 소수처리 비추천.
+            alert(val);
+        }
+
+    </script>
+    <style type="text/css">
+
+    </style>
+ </head>
+ <body>
+    <h2>1. 숫자형 형변환 number() 함수</h2>
+    <p>문자형의 정수 및 실수를 숫자형으로 변환시켜준다.</p>
+    <input type="text" id="num">
+    <button onclick="numTest(num.value);">확인</button>
+
+    <h2>2. 정수형 형변환 parseInt 함수</h2>
+    <input type="text" id="int">
+    <button onclick="intTest(int.value);">확인</button>
+
+    <h2>3. 실수형 형변환 parseFloat 함수</h2>
+    <input type="text" id="float">
+    <button onclick="floatTest(float.value);">확인</button>
+    <!-- input에 입력한 값은 value에 저장되나? value는 기본값 아닌가? -->
+    
+    <h2>4. 문자열 숫자의 + 연산</h2>
+    <button onclick="stringTest();">확인</button>
+    <div id="res"></div>
+    <script type="text/javascript">
+        let stringTest = () => {
+            //id가 res인 div태그를 탐색
+            let doc = document.getElementById("res");
+
+            let val = 7+7;
+            // 숫자 합 14
+            doc.innerHTML += val + "<br>";
+
+            val = 7+"7";
+            // 숫자와 문자 합은 문자로 77
+            doc.innerHTML += val + "<br>";
+
+            val = 7+7+"7";
+            //숫자 합하고, 문자가 더해져 문자로 147
+            doc.innerHTML += val + "<br>";
+
+            val = "7"+7+7;
+            //문자로 시작하면 뒤에 숫자 합 있어도 문자로 처리해서 777
+            doc.innerHTML += val + "<br>";
+            
+        }
+    </script>
+
+ </body>
+ </html>
