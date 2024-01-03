@@ -1,0 +1,140 @@
+<!-- 
+날짜 관련 객체
+
+Date 객체
+: 날짜 객체
+: 변수타입 객체명 = new Date([객체 속성]);
+([]부분은 생략 가능)
+(Date 객체 속성에 월을 집어넣을 때, 월은 -1 한 값을 넣어야한다.)
+
+Date 객체 관련 함수
+현재
+1. toDateString()
+: 영어 요일 영어 월 일 4자리 연 시:분:초 표준시각 기준
+
+2. toLocaleDateString()
+: 4자리 연. 숫자 월. 숫자 일.
+
+3. toLocaleString()
+: 4자리 연. 숫자  월. 숫자 일. 오전/오후 시:분:초
+
+4. toLocaleTimeString()
+: 오전/오후 시:분:초
+
+특정시점
+1. getFullYear()
+: 연 4자리
+
+2. getMonth()
+: 월 1자리
+
+3. getDate()
+: 날짜
+
+4. getDay()
+: 요일
+(0은 일요일 ~ 6은 토요일)
+
+
+스크립트에서 button 태그의 onclick 처리
+
+<script type="text/javascript">     
+        document.getElementsByTagName("button")[해당 버튼 인덱스].onclick = function(){
+            눌렀을 때 실행할 코드
+        };
+</script>
+
+단, 이렇게 만들 경우 반드시 해당 위치의 버튼 태그 아래에 스크립트 작성해야한다.
+왜냐하면, 브라우저는 위에서 아래로 한 줄씩 코드를 읽어들이는데,
+객체가 생성도 안되어있는걸 가져오려해 에러가 발생한다.
+
+아니면 외부에서 작성한 스크립트를 불러오는 처리를 해준다.
+
+또는 window.onload를 이용한다.
+
+window.onload
+: 브라우저가 화면에 나올 내용을 모두 읽어들인 후의 시점
+
+<script type="text/javascript">
+        //스크립트에서 button의 onclick 처리
+        여기서는 TagName 사용했는데 다른거 사용해도 상관없다.
+
+        window.onload = function(){
+            document.getElementsByTagName("button")[해당 버튼 인덱스].onclick = function(){
+                버튼 눌렀을 때 실행 내용
+            };
+        }
+        브라우저가 화면에 나올 내용을 모두 읽어들인 다음의 시점에는 객체 모두 생성되어 있는 상태이다.
+        브라우저가 화면에 나올 내용을 모두 읽은 다음 시점에 함수를 실행시킨다.
+        이렇게 하면 스크립트 위치 상관없이 에러 안내고 실행할 수 있다.
+
+        window.onload의 함수와 분리해서 써도 된다.
+        window.onload = function(){
+            document.getElementByTagName("button")[해당 버튼 인덱스].onclick = 함수명;
+            함수명 뒤에 () 붙이면 누르기도 전에 실행해버린다.
+        }
+
+        function 함수명(){
+            실행할 내용;
+        }
+</script>
+ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>날짜 객체</title>
+    <script type="text/javascript">
+        //스크립트에서 button의 onclick 처리
+        window.onload = function(){
+            document.getElementsByTagName("button")[0].onclick = function(){
+                let toDay = document.getElementById("today");
+                // console.log(toDay);
+                let date = new Date(); // 오늘 날짜
+                toDay.innerHTML += date + "<br>"; // Wed Oct 25 2023 11:30:51 GMT+0900 (한국 표준시)
+                toDay.innerHTML += date.toDateString() + "<br>"; // Wed Oct 25 2023
+                toDay.innerHTML += date.toLocaleDateString() + "<br>"; // 2023. 10. 25.
+                toDay.innerHTML += date.toLocaleString() + "<br>"; // 2023. 10. 25. 오전 11:32:18
+                toDay.innerHTML += date.toLocaleTimeString() + "<br>"; // 오전 11:34:00
+            };
+
+            document.getElementsByTagName("button")[1].onclick = testDate;
+            //해당 태그에 클릭 이벤트가 발생하면 처리할 함수를 미리 준비시킨다.
+            //()붙이면 준비시키면서 바로 실행시켜버리는 구조가 되기 때문에 ()는 붙이지 않는다.
+        //     document.getElementsByTagName("button")[1].onclick = testDate 
+        //     코드로 인해 해당 태그에 클릭이벤트가 발생되면 처리할 함수를 설정을 하게 된거구요. 준비를 한거. 
+        //     그렇게 준비가 되어 있는 상태에서 화면에 클릭이벤트가 발생되면 설정된 내용에 따라 함수가 동작을 하는 구조가 됩니다. 이러한 순서로 이벤트 처리가 진행이 됩니다.
+        }
+
+        function testDate(){
+            let year = 2020;
+            let month = 3;
+            let day = 15;
+
+            let date = new Date(year, month-1, day);
+            // 월은 1달 적게 줘야한다.
+            document.getElementById("spec").innerHTML += date + "<br>";
+            // 월에 -1 줘야 맞는 특정 날짜가 출력된다. 아니면 1씩 크게 나온다.
+        
+            document.getElementById("spec").innerHTML 
+            += date.getFullYear() + "/" + (date.getMonth()+1) + "/" + date.getDate() + "/" + date.getDay();
+            // getMonth로 가져올 때는 -1한 월의 숫자를 그대로 가져오므로, 1 더해서 원상복구 시킨다.
+        
+        
+        
+        }
+    </script>
+ </head>
+ <body>
+    <h1>오늘 날짜 출력</h1>
+    <span id="today"></span><br>
+    <button>오늘 날짜</button>
+
+    <h1>특정 날짜 출력</h1>
+    <span id="spec"></span><br>
+    <button>특정 날짜</button>
+
+ </body>
+ </html>
