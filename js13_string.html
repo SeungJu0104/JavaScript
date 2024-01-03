@@ -1,0 +1,153 @@
+<!-- 
+String
+
+자바 스크립트에서는 자바처럼 문자와 문자열을 따로 구분하지 않는다.
+("" '' 등 아무거나 사용해도 상관 없다.)
+
+문자열 안에 또 다른 문자열을 쓰려면 "" 안에 ''를 사용한다.
+
+문자열 합치기
+1. + 연산자
+: 여러 문자열을 하나로 합쳐주는 연산자 역할도 가능하다.
+: 문자열 + 문자열 = 둘을 합친 새 문자열
+
+2. concat 함수
+: 여러 문자열을 입력해 하나로 합치는 함수
+: 변수명 또는 문자열.concat(뒤에 합칠 변수명 또는 문자열, 뒤에 합칠 변수명 또는 문자열, ...);
+
+문자열 비교하기
+1. == 연산자
+: 비교하는 자료형에도 자동 형변환 적용해서 비교한다.
+: 자바와 다르게 문자도 비교 가능하다.
+
+2. === 연산자
+: 형변환을 통한 비교를 원하지 않을 경우 또는 
+  타입까지 비교하고 싶을 경우 사용한다.
+
+문자열 검색
+1. indexOf 함수
+: 왼쪽부터 시작해 오른쪽으로 찾으며, 찾은 인덱스 번호를 리턴한다. 
+(찾는 값이 없으면 -1을 리턴한다.)
+(중복되는 찾는 값이 더 있어도, 가장 앞에 있는 1개의 인덱스 번호만 리턴한다.)
+(중복없이 찾는 값이 1개면 indexOf와 lastIndexOf는 같은 인덱스 번호를 리턴한다.)
+: 비교할 대상.indexOf(찾는 값 또는 변수명);
+
+2. lastIndexOf 함수
+: 오른쪽부터 시작해 왼쪽으로 찾으며, 찾은 인덱스 번호를 리턴한다.
+(찾는 값이 없으면 -1을 리턴한다.)
+(중복되는 찾는 값이 더 있어도, 가장 뒤에 있는 1개의 인덱스 번호만 리턴한다.)
+(중복없이 찾는 값이 1개면 indexOf와 lastIndexOf는 같은 인덱스 번호를 리턴한다.)
+: 비교할 대상.lastIndexOf(찾는 값 또는 변수명);
+
+문자열 추출
+1. substring
+: 시작 인덱스, 종료 인덱스를 입력해 추출한다.
+: 시작 인덱스 위치부터 종료 인덱스 - 1 위치까지 추출한다.
+: 추출대상.substring(시작 인덱스 번호, 종료 인덱스 번호);
+
+2. split
+: 기준이 되는 내용으로 나눠 배열로 저장한다.
+: 추출대상.split(기준 내용);
+
+ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String 객체</title>
+    <script type="text/javascript">
+        function strTest01(){
+            let str01 = "String ";
+            let str02 = "Test ";
+
+            // + 연산자
+            let str03 = str01 + str02;
+            alert("string + Test = " + str03);
+
+            // concat 연산자 : 여러 문자열을 입력해 하나로 합치는 함수
+            str03 = str01.concat(str02);
+            alert("concat() : " + str03);
+        }
+
+        function strTest02(){
+            let str = prompt("이름 입력");
+
+            // == 연산자 : 비교하는 자료형에도 자동 형변환
+            if(str == '이창진'){
+                alert(str + "님, 환영합니다.");
+            }else{
+                alert("이름을 다시 확인해주세요.");
+            }
+
+            let numVal = 10;
+            if(numVal == "10"){
+                alert("숫자 10이 맞습니다.");
+            }else{
+                alert("숫자 10이 아닙니다.");
+            }
+
+            // === 연산자 : 형변환을 통한 비교를 원하지 않을 경우 또는 타입까지 비교하고 싶을 경우 사용한다.
+            numVal = 10;
+            if(numVal === "10"){
+                alert("숫자 10이 맞습니다.");
+            }else{
+                alert("숫자 10이 아닙니다.");
+            }
+        }
+
+        function strTest03(){
+
+            let str = "이창진 김창진 박창진 최창진 정창진 김창진";
+            let prop = prompt("이름 입력"); // prompt이용해 이름 하나 입력 받는다.
+            // indexOf() : 왼쪽부터 시작해 오른쪽으로 찾으며, 찾은 인덱스를 리턴한다. 찾는 값이 없으면 -1을 리턴한다.
+            alert("indexOf() : " + str.indexOf(prop));
+            // lastIndexOf() : 오른쪽부터 시작해 왼쪽으로 찾으며, 찾은 인덱스를 리턴한다. 찾는 값이 없으면 -1을 리턴한다.
+            alert("lastIndexOf() : " + str.lastIndexOf(prop));
+        }
+
+        function strTest04(){
+            let strVal = "문자열 추출하기.사용함수:indexof,lastindexof,substring,split.";
+
+            // substring : 시작인덱스, 종료인덱스를 입력해 추출한다.
+            let startIndex = strVal.indexOf(":")+1; // 시작 인덱스 번호
+            let endIndex = strVal.lastIndexOf("."); // 종료 인덱스 번호
+            let subStr = strVal.substring(startIndex, endIndex);
+            alert(subStr);
+
+            // split : 기준이 되는 내용으로 나누어 배열로 저장한다.
+            let splitVal = subStr.split(","); //, 를 기준으로 나누어 배열에 저장한다.
+            alert(splitVal + "(" + splitVal[2] + ")"); 
+
+        }
+
+
+    </script>
+ </head>
+ <body>
+    <h1>String</h1>
+    <p>
+        문자열 합치기
+        <button onclick="strTest01();">클릭</button>
+    </p>
+    <br>
+    <p>
+        문자열 비교하기
+        <button onclick="strTest02();">클릭</button>
+    </p>
+    <br>
+    <p>
+        문자열 검색
+        <button onclick="strTest03();">클릭</button>
+    </p>
+    <br>
+    <p>
+        문자열 추출
+        <button onclick="strTest04();">클릭</button>
+    </p>
+
+
+
+ </body>
+ </html>
