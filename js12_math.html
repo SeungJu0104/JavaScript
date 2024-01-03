@@ -1,0 +1,61 @@
+<!-- 
+Math 객체
+
+랜덤 숫자
+Math.random()
+: 0에서 1사이 난수 발생시키는 함수
+
+Math.floor(값 또는 변수명)
+: 소수점 버리는 함수
+
+
+
+
+ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math 객체</title>
+    <script type="text/javascript">
+        function mathTest(){
+            //랜덤 숫자(random() : 0-1사이 난수 발생)
+            let rnum = Math.random();
+            alert(rnum);
+
+            //1-100사이 난수
+            rnum = Math.floor(Math.random()*100+1);
+            // Math.floor로 버림 처리
+            alert(rnum);
+
+            document.getElementById("res").innerHTML += "random 숫자 : " + rnum + "<br>";
+        }
+
+        function ranColor(){
+            // let rnum = function(){
+            //     return Math.floor(Math.random*256);
+            //     // 0 - 255사이 난수를 리턴 준다.
+            // }
+            let rnum = () => Math.floor(Math.random()*256);
+                // 0과 255사이 난수를 리턴 준다.
+            
+
+            document.body.style.backgroundColor = "rgb("+rnum()+", "+rnum()+", "+rnum()+")";
+                //다시 해보기
+
+        }
+
+
+
+    </script>
+ </head>
+ <body>
+    <h1>Math</h1>
+    <button onclick="mathTest();">버튼</button>
+    <div id="res"></div>
+    <br>
+    <button onclick="ranColor();">배경색 랜덤 처리</button>
+ </body>
+ </html>
