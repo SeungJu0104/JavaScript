@@ -1,0 +1,50 @@
+<!-- 
+문서 주소와 관련한 객체
+
+location 객체
+: html의 a 태그와 유사한 역할을 한다.
+
+페이지 이동(이동하려는 페이지의 서버로 요청을 보낸다.)
+location.href
+: 이전 페이지로 이동 가능
+: location.href = "url 주소";
+
+location.replace
+: 이전 페이지로 이동 불가하다.
+: location.replace("url 주소");
+
+페이지 새로 고침
+location.reload();
+
+ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주소 관련 객체</title>
+    <script type="text/javascript">
+        function locTest(){
+            // 페이지 이동
+            //.href는 이전 페이지로 이동 가능하고,
+            //.replace는 이전 페이지로 이동 불가하다.
+            location.href="https://www.google.co.kr";
+            location.replace("https://www.google.com");
+
+            // 페이지 새로 고침
+            location.reload();
+
+        }
+
+
+
+
+    </script>
+ </head>
+ <body>
+    <a href="https://www.google.com">구글로 이동</a>
+
+    <button onclick="locTest();">이동</button>
+ </body>
+ </html>
