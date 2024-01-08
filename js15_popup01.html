@@ -1,0 +1,30 @@
+<!-- 
+팝업 창
+: 새로운 페이지를 새로운 윈도우 창에서 띄운다.
+: window.open(url, target, specs);
+(url => 보여줄 페이지의 경로)
+(target => 새롭게 뜰 창의 속성(_blank -> 새 창에 띄운다. / _self -> 현재 창에 띄운다.))
+(specs => 창의 속성)
+
+window 객체는 최상위 객체이자, 브라우저 자체를 의미한다.
+ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>팝업창 1</title>
+    <script type="text/javascript">
+
+        function popUp(){
+            window.open("js15_popup02.html", '_blank', "width = 200px, height = 200px");
+            // 높이, 너비 200px으로 고정시킨 새 창을 띄워 js15_popup02.html로 이동한다.
+        }
+
+    </script>
+ </head>
+ <body>
+    <button onclick="popUp();">팝업</button>
+ </body>
+ </html>
