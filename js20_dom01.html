@@ -1,0 +1,117 @@
+<!-- 
+계층 구조
+아래 html 5를 보면 Document => html => head / body => h1 / .... => ....
+이러한 구조로 되어있다.
+각 단위를 노드 또는 태그라고 부른다.
+각 노드에는 속성, 텍스트 등이 들어가 있다.
+
+
+Document는 노드의 집합이라고 볼 수도 있다.
+
+부모 태그를 찾는 속성
+: 자식 태그 담긴 변수명 또는 자식 태그명.parentNode;
+: 자식 태그 담긴 변수명 또는 자식 태그명.parentElement;
+(부모 태그와 자식 태그 다 같이 가져온다)
+
+자식 태그를 찾는 속성
+: 부모 태그 담긴 변수명 또는 부모 태그명.children;
+(배열로 반환한다.)
+: 부모 태그 담긴 변수명 또는 부모 태그명.childNodes;
+(NodeList 로 반환한다.)
+(중간에 텍스트 노드들도 포함해서 탐색한다.)
+(엘리먼트 + 텍스트 노드)
+(예를 들어, <div> ㅁ <p>child01</p> ㅁ <p>child02</p> ㅁ <p>child03</p> ㅁ </div>
+(가 있다면 ㅁ 이 있는 부분이 텍스트 노드 부분이다.)
+
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부모, 자식 탐색</title>
+    <script type="text/javascript">
+        // 부모 태그 구하기
+        function searchPar(){
+            let child02 = document.getElementsByTagName("p")[1];
+            // div 태그 아래에 있는 p 태그들 중 child02 p태그 선택해 child02 변수에 저장
+
+            let parent01 = child02.parentNode;
+            // 변수 parent01 에 child02 p태그의 부모태그인 div 태그가 저장된다.
+            
+            console.log(parent01);
+            
+            parent01 = child02.parentElement;
+            // 변수 parent01 에 child02 p태그의 부모태그인 div 태그가 저장된다.
+            console.log(parent01);
+
+            parent01.style.backgroundColor = "black";
+            // div 태그의 배경색이 검정으로 바뀐다.
+        }
+
+        // 자식 태그들 구하기
+        function searchChi(){
+            let parent01 = document.getElementsByTagName("div")[0];
+            // 첫번째 div 태그를 갖고 와 parent01 변수에 저장한다.
+
+            
+            let divChild = parent01.children;
+            // div 태그의 자식 태그들을 배열로 divChild 변수에 저장한다.
+            // 엘리먼트만 갖고 온다.
+
+            divChild = parent01.childNodes;
+            // div 태그의 자식 태그들을 NodeList로 divChild 변수에 저장한다.
+            // 단, 중간에 text 노드들도 포함한다.
+            // 노드 탐색(엘리먼트 + 텍스트)
+            // <div> ㅁ <p>child01</p> ㅁ <p>child02</p> ㅁ <p>child03</p> ㅁ </div>
+            // ㅁ 이 있는 부분이 텍스트 노드 부분이다.
+
+            console.log(divChild);
+
+            //3번째 p 태그의 배경색 변경
+            divChild[5].style.backgroundColor = "pink";
+
+        }
+
+        function test01(){
+            document.getElementsByTagName("p")[3].parentElement.style.backgroundColor = "pink";
+        }
+
+        function test02(){
+            document.getElementsByTagName("div")[2].childNodes[3].style.fontSize = "20pt";
+            
+        }
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+    <h1>부모 탐색, 자식 탐색</h1>
+    <div> 
+        <p>child01</p>
+        <p>child02</p>
+        <p>child03</p> 
+    </div>
+    <button onclick="searchPar();">부모 탐색</button>
+    <button onclick="searchChi();">자식 탐색</button>
+
+    <h3 onclick="test01();">1. "test01 태그를 포함한 div태그"에 배경색을 적용한다.</h3>
+    <h3 onclick="test02();">2. "마지막 div 태그에 포함된 test04 태그"의 폰트 크기를 20pt로 변경한다.</h3>
+
+    <div>
+        <p>test01</p>
+        <p>test02</p>
+    </div>
+
+    <div>
+        <p>test03</p>
+        <p>test04</p>
+    </div>
+
+
+</body>
+</html>
