@@ -1,0 +1,75 @@
+<!-- 
+엘리먼트 노드 안에는 텍스트 노드, 속성 노드 등 여러가지가 담겨있다.
+
+엘리먼트를 스크립트로 생성
+: 변수 타입 태그 노드명 = document.createElement("태그명");
+
+텍스트 노드 생성
+: 변수 타입 텍스트 노드 명 = document.createTextNode("내용");
+
+작성한 텍스트 노드를 엘리먼트에 추가
+:태그노드명.appendChild(생성한 텍스트 노드);
+
+텍스트 노드 생성과 엘리먼트 추가를 한번에 하는 방법
+: 태그 노드명.appendChild(document.createTextNode("내용"));
+
+속성 노드 생성
+: 변수 타입 속성 노드명 = createAttribute("속성명");
+
+속성 내용 작성
+: 속성 노드명.nodeValue = "속성 내용;"
+
+속성 추가 및 변경
+: 태그 노드명.setAttributeNode(속성명);
+: 태그 노드명.setAttribute(속성명, "속성 내용");
+(setAttribut를 쓰면 속성 생성과 내용 작성도 한번에 가능하다.)
+
+작성 완료한 엘리먼트를 추가
+: .appendChild(태그명);
+
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dom 생성</title>
+    <script type="text/javascript">
+        function eleCreate(){
+            //div 태그 생성
+            let div = document.createElement("div");
+            //<div></div>
+
+            // 텍스트 노드 생성
+            let txt = document.createTextNode("엘리먼트 생성");
+            // 지금은 글자만 만들어진 상태
+
+            // 작성한 텍스트 노드를 div 태그에 추가
+            div.appendChild(txt);
+            // 텍스트 노드를 자식 노드로 추가
+            // <div>엘리먼트 생성</div>
+
+            // 속성노드 생성
+            let attr = document.createAttribute("style");
+            // style = ""
+            
+            // 속성 내용 작성
+            attr.nodeValue="border: 2px solid blue";
+            // style="border: 2px solid blue";
+
+            // 속성 내용 추가
+            div.setAttributeNode(attr);
+            // <div style="border: 2px solid blue;">엘리먼트 생성</div>
+
+            // 작성 완료한 엘리먼트를 추가
+            document.body.appendChild(div);
+
+        }
+
+    </script>
+</head>
+<body>
+    <button onclick="eleCreate();">엘리먼트 생성</button>
+</body>
+</html>
