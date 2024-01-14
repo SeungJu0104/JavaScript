@@ -1,0 +1,78 @@
+<!-- 
+태그에 내용 추가
+: 태그의 시작 태그와 종료 태그 사이에 내용을 추가
+: 태그명.textContent = "내용";
+(textContent는 다른 태그 등 없이 문자열 문장만 추가할 때 사용 추천.)
+(태그 등이 들어간 내용을 추가해야하면 createTextNode와 appendChild를 같이 사용하는 방법 추천.)
+
+새로운 자식 태그를 끝에 붙여넣는다.
+: 부모 태그명.appendChild(태그명);
+
+새로운 자식 태그를 다른 특정 자식 태그 앞에 붙여넣는다.
+: 부모 태그명.insertBefore(새로 붙을 태그, 새로 붙일 태그 뒤에 붙을 기존 태그);
+
+ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script type="text/javascript">
+        function addAppend(){
+            let fieldset = document.getElementById("addele");
+
+            let p = document.createElement("p");
+
+            // p.appendChild(document.createTextNode("자식 태그들 중 마지막에 붙여넣는다."));
+
+            p.textContent = "자식 태그들 중 마지막에 붙여넣는다.";
+            // p태그 시작 태그 종료 태그 사이 내용 부분에 작성한 내용을 넣는다.
+
+            fieldset.appendChild(p);
+            // 필드셋 태그의 맨 마지막 자식 태그로 p 태그가 추가된다.
+        }
+
+        function addBefore(){
+            let fieldset = document.getElementById("addele");
+
+            let p = document.createElement("p");
+            p.textContent = "엘리먼트 앞에 붙여넣는다.";
+            // <p>엘리먼트 앞에 붙여넣는다.</p>
+
+            let div = document.querySelector("#addele > div");
+            // fieldset의 자식 태그인 div 태그 선택
+
+            fieldset.insertBefore(p,div);
+            // .insertBefore(새롭게 넣으려는 태그, 기존 태그)
+            // 기존 태그 앞에 새롭게 넣으려는 태그가 추가된다.
+
+        }
+
+        function moveEle(){
+            let ele = document.getElementById("addele").childNodes[3];
+
+            console.log(ele);
+
+            document.body.appendChild(ele);
+            // 원본이 움직인다.
+        }
+
+
+
+    </script>
+ </head>
+ <body>
+    <h1>태그 추가하기</h1>
+    <button onclick="addAppend();">appendChild()</button>
+    <button onclick="addBefore();">insertBefore()</button>
+    <button onclick="moveEle();">엘리먼트 이동(appendChild 활용)</button>
+
+    <!-- fieldset이 부모태그, div가 자식 태그 -->
+    <fieldset id="addele">
+        <legend>부모 태그</legend>
+        <div>div 태그</div>
+    </fieldset>
+ </body>
+ </html>
