@@ -1,0 +1,135 @@
+<!-- 
+forms
+: form 태그 요소를 모두 배열로 반환한다.
+(form 태그가 여러개면 첫번째는 0번 인덱스에 담아서, 두번째는 1번 인덱스에 담아서 이런 식으로 배열로 반환)
+
+자식 태그 삭제
+: 부모 태그명.removeChild(태그명);
+
+마지막 자식 태그 선택
+: 부모 태그명.lastChild();
+
+ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script type="text/javascript">
+        function tableVal(){
+            let doc = document.forms[0];// 0번째 인덱스의 form태그를 선택해 doc에 저장한다.
+
+            let vals = [doc.id.value, doc.pw.value, doc.addr.value, doc.phone.value];
+            // 변수 vals에 입력받은 값들이 배열로 저장된다.
+            // console.log(vals);
+
+            //유효 값 검사
+            for(let i = 0; i < vals.length; i++){
+                if(vals[i] == "" || vals[i] == null || vals[i] == undefined){
+                    alert("모두 다 입력해주세요.");
+                    return; // 종료
+                }
+            }
+
+            let addTr = createRow(vals);
+            document.getElementById("addtr").appendChild(addTr);
+        }
+
+        // Vals를 받아서 row를 만든다.
+        function createRow(vals){
+            let tr = document.createElement("tr");
+            //<tr></tr>
+
+            for(let i = 0; i < vals.length; i++){
+                let td = document.createElement("td");
+                //<td></td>
+
+                td.textContent = vals[i];
+                //<td> 값 </td>
+
+                console.log(tr);
+
+                tr.appendChild(td);
+                
+            }
+
+            let delTd = document.createElement("td");
+            
+            delTd.innerHTML = "<input type='button' value='삭제' onclick='delRow(this);'>";
+            //delRow(this); 하면 this는 여기 input 태그를 의미한다.
+            // innerHTML을 이용해 시작 태그와 종료 태그 사이 내용에 input 태그를 집어 넣는다.
+            // <tr>
+            //    <td> id 값 </td> <td> pw 값 </td> <td> addr 값 </td> <td> phone 값 </td> <td><input type = 'button' value = '삭제' onclick='delRow(this);'></td>  
+            // </tr>
+            // 이런 형태의 표가 만들어진다.
+            tr.appendChild(delTd);
+
+            return tr;
+        }
+
+        // 마지막 tr 태그 삭제
+        function deleteVal(){
+            let tbody = document.getElementById("addtr");
+            let delTr = tbody.lastChild; //마지막 tr 태그
+            tbody.removeChild(delTr);
+
+        }
+
+        //표의 삭제 버튼 클릭한 row를 삭제
+        function delRow(ele){
+            //ele 변수에 input 태그를 받는다.
+            // console.log(ele.parentNode.parentNode);
+            document.getElementById("addtr").removeChild(ele.parentNode.parentNode);
+        }
+
+    </script>
+ </head>
+ <body>
+    <form>
+        <table id="intable">
+            <tr>
+                <td>아이디 : </td>
+                <td><input type="text" name="id"></td>
+            </tr>
+            <tr>
+                <td>비밀번호 : </td>
+                <td><input type="text" name="pw"></td>
+            </tr>
+            <tr>
+                <td>주소 : </td>
+                <td><input type="text" name="addr"></td>
+            </tr>
+            <tr>
+                <td>전화번호 : </td>
+                <td><input type="text" name="phone"></td>
+            </tr>
+            
+                
+        </table>
+        <input type="button" value="추가" onclick="tableVal();">
+        <input type="button" value="삭제" onclick="deleteVal();">
+    </form>
+    <hr>
+    <div id="addTable">
+        <table border="1px;" id="ctb">
+            <!-- 열 너비 설정 -->
+            <col width="100px;"><col width="100px;"><col width="300px"><col width="100px">
+            <thead>
+                <tr>
+                    <th>I D</th>
+                    <th>P W</th>
+                    <th>ADDR</th>
+                    <th>PHONE</th>
+                    <th>DELETE</th>
+                </tr>
+            </thead>
+            <tbody id="addtr">
+
+            </tbody>
+        </table>
+    </div>
+
+ </body>
+ </html>
