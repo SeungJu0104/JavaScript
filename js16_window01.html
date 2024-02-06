@@ -1,0 +1,210 @@
+<!-- 
+이클립스 톰캣 연동
+
+이클립스 실행해서 설정에 encodinig 검색해
+CSS Files, HTML Files, JSP Files 모두 encoding을 UTF-8로 변경
+
+그리고 설정의 installed JREs 들어가서 아마존 correcto해서 11로 맞추고,
+Compiler 들어가서 11로 맞춘다.
+
+이후 아파치 톰캣 들어가서 톰캣 10버전 Core의 zip 파일을 다운 받는다.
+그리고 원하는 위치에 압축 해제한다.
+
+나중에 내가 코딩한 자료를 tomcat 위치의 webapps 폴더에 넣고, 
+bin 폴더에 들어가서 startup 을 서버에 올라감과 동시에 작동한다.
+(이러면 외부에서도 접속 가능)
+(이건 배포 단계)
+
+동작 중인 startup이 있다면 닫고, shutdown을 실행해 혹시 동작하고 있는 것도 종료시킨다.
+
+수업에서는 이클립스와 연동해서 가상환경 만들고 톰캣 동작시켜, 테스트를 진행할 예정.
+(외부에서는 접속 안되고, localhost로 테스트)
+
+이클립스 하단 server 탭의 create new server해서 톰캣 위치 찾아서 디렉토리 설정해준다.
+(디렉토리 설정할 때 톰캣의 bin 폴더 등이 바로 하위 위치에 있는 디렉토리 단에서 설정해줘야한다.)
+그리고 JRE 설정해준다.
+다음 만들어 놓은 웹 프로젝트가 있다면 옮겨준다.
+
+톰캣 add and remove 할 때 넣을 파일이 없다라는 문제가 있으면 
+프로젝트 설정들어가서 다이나믹 웹 모듈 버전을 약간 낮춰본다.(4.0)
+
+
+브라우저와 톰캣이 담긴 이클립스로 구성한 가상환경 간에 요청과 응답
+
+http://localhost:8080/JS_Test/js16_window01.html
+localhost는 사용자명 8080은 포트명 JS_Test는 프로젝트명 js16_window01.html은 파일명
+사용자명과 포트명 사이에 : 넣어야한다.
+
+http://ip:port/프로젝트명/자원 세부경로
+
+
+
+window 객체
+: 
+: 
+
+window 객체 프로퍼티
+1. document
+: 
+: 
+2. history
+: 
+: 
+3. location
+: 
+: 
+4. naviator
+: 
+: 
+5. parent
+: 
+: 
+6. self 
+: 코드가 작성되어있는 객체 자체
+: self.함수명 등
+7. opener
+: 창을 연다.
+: [window.]opener
+([]부분 생략 가능)
+
+등 다양하다.
+
+window 객체 메소드
+1. alert 함수
+2. confirm 함수
+3. prompt 함수
+4. back 함수
+5. forward 함수
+6. setInterval 함수
+7. open 함수
+: 새로운 팝업 창 생성
+: window.open(url, target, specs);
+8. close 함수
+: 창을 닫는다.
+: .close();
+
+
+
+
+
+
+
+
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"> <!-- 인코딩 언어 설정은 여기서 바꿔도 괜찮다. -->
+<title>window 객체</title>
+</head>
+<script type="text/javascript">
+	function openWin(){
+		let url = "js16_window02.html";
+		let target = "_blank"; // 비우면 기본 값인 해당 창에서 이동으로 설정(_self)
+		let prop = "width = 500px; height = 500px";
+		window.open(url, target, prop);
+	}
+	
+	function registForm(){
+		// 숨겨진 회원가입 창을 다시 보이게 한다.
+		document.getElementById("regist").style.display = "block";
+		// 뒤를 비활성화 된 것처럼 색 표기
+		document.body.style.background = "gray";
+		// 버튼 2개를 비활성화
+		let btn = document.getElementsByName("btn"); // 배열로 버튼 2개 태그 가져와 btn에 저장
+		
+		for(let i in btn){// 변수 i에 btn 변수에 있는 값들을 하나씩 담는다. 자바에서는 for(변수 i : 하나씩 i에 값을 넣을 대상){};
+			btn[i].disabled = "disabled";
+			// disabled 는 비활성화
+		};
+		
+	}
+	
+	function idchk(){
+		alert("중복체크를 확인하세요.");
+		
+	}
+	
+	let idCheck = () => {
+		window.open("js16_window03.html","","width = 300px; height = 300px;");
+		
+	}
+	
+
+</script>
+<style type="text/css">
+	#regist{
+		border: 1px solid black;
+		background: pink;
+		position: absolute;
+		top: 200px;
+		left: 500px;
+		display: none;
+	}
+
+</style>
+<body>
+
+<h3>http://localhost:8080/JS_Test/js16_window01.html</h3>
+<h1>window 객체</h1>
+<pre>
+window 객체 프로퍼티
+1. document
+2. history
+3. location
+4. naviator
+5. parent
+6. self
+7. opener
+등
+
+window 객체 메소드
+1. alert 함수
+2. confirm 함수
+3. prompt 함수
+4. back 함수
+5. forward 함수
+6. setInterval 함수
+7. open 함수
+8. close 함수
+	
+</pre>
+
+<div>
+	<h1>팝업창 생성</h1>
+	<button onclick="openWin();" name="btn">창 열기</button>
+	
+	<hr>
+	
+	<h1>회원 가입</h1>
+	<button onclick="registForm();" name="btn">회원 가입</button>
+	
+	<div id="tt"></div>
+</div>
+
+<div id="regist">
+	<form>
+		<table>
+			<caption>회원가입</caption>
+			<tr>
+				<td>아이디</td>
+				<td>
+					<input type="text" name="id" onclick="idchk();" readonly="readonly">
+					<!-- readonly 설정하면 삭제, 수정, 입력 불가하고 오직 읽기만 가능 -->
+					<input type="button" value="중복체크" onclick="idCheck();">
+				</td>
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td><input type="password" name="pwd" style="color:red;"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="button" value="확인"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+	
+</body>
+</html>
