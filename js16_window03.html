@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원가입 팝업 창</title>
+</head>
+<script type="text/javascript">
+	// 중복 체크할 임의의 아이디 목록 작성
+	const ids=['multi','java',"script",'lcj','leecj'];
+	
+	
+	function confirmChk(){
+		//input 태그로 입력받은 id 값을 변수 idforCheck에 저장한다.
+		let id = document.getElementById("id").value;
+		
+		//메세지를 출력할 div 태그를 선택
+		let div = document.getElementsByTagName("div")[0];
+		
+		if(ids.indexOf(id) != -1){
+			div.innerHTML = "<b>해당 아이디가 존재합니다.</b>";
+		}else{
+			let userId = "사용할 수 있는 아이디입니다." + "<input type = 'button' value = '확인' onclick='insertId(\""+id+"\");'>";
+			// "" 안에 문자로 처리해야할 내용은 ''으로 처리한다.
+			//\" \" 는 콘솔에서 &quot; &quot; 로 처리된다.
+			div.innerHTML = userId;
+		}
+	}
+	
+	function insertId(id){
+		//window.opener를 이용해 window01.html의 아이디 입력받는 input 태그에 중복확인 끝난 id 값을 넣어준다.
+		opener.document.getElementsByName("id")[0].value = id;
+		// id 값이 들어간 후 커서를 비밀번호 입력하는 input 태그로 넘긴다.
+		opener.document.getElementsByName("pwd")[0].focus();
+		// 팝업 창을 닫는다.
+		self.close();
+	}
+	
+</script>
+<body>
+	<table>
+		<tr>
+			<td>아이디</td>
+			<td><input type="text" id="id"></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="button" value="중복확인" onclick="confirmChk();">
+				<input type="button" value="취소" onclick="self.close();">
+				<!-- 팝업 창을 닫는다. -->
+			</td>
+		</tr>
+	</table>
+	<div></div>
+</body>
+</html>

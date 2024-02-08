@@ -1,0 +1,33 @@
+<!-- 변경사항은 톰캣을 restart 시켜도 적용된다. -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>팝업 실습</title>
+<script type="text/javascript">
+	function test(){
+		// input 태그를 탐색해, 해당 태그에 입력된 value 값을 갖고 온다.
+		let val = document.getElementsByName("test")[0].value;
+		// 이름(test)으로 요소를 배열로 반환받아, 인덱스 0에 위치한 요소의 value를 val 변수에 저장한다.
+		
+		// value 값을 window01.html의 div 태그(id=tt)에 보낸다.
+		window.opener.document.getElementById("tt").innerHTML = val;
+		// 팝업창을 연 window 객체를 찾아 거기서 id가 tt인 요소를 선택해 val 변수에 저장된 값을 내용에 넣는다.
+		
+		close();
+		// 팝업 창을 닫는다.(self. 생략했다.)
+		// 헷갈리면 self. 붙이기
+	}
+
+</script>
+</head>
+<body>
+<h1>팝업 실습</h1>
+<input type="text" name="test">
+<input type="button" onclick="test();" value="전달">
+<input type="button" onclick="self.close();" value="창닫기"> 
+<!-- self는 여기서 팝업창을 의미하고, 이를 닫는다는 close() 함수 실행 -->
+<!-- 내가 작성한 함수명이 close일 수도 있이서 close 앞에 self. 를 붙여줘야 인식한다. -->
+</body>
+</html>
